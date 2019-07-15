@@ -60,8 +60,6 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <link href=\"assets/css/style.css\" rel=\"stylesheet\">\r\n");
       out.write("    <link href=\"assets/css/style-responsive.css\" rel=\"stylesheet\">\r\n");
       out.write("    <link href=\"assets/css/table-responsive.css\" rel=\"stylesheet\"> \r\n");
-      out.write("    \r\n");
-      out.write("    \r\n");
       out.write("  </head> \r\n");
       out.write("\r\n");
       out.write("  <body>\r\n");
@@ -69,7 +67,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t  \t  <div id=\"login-page\">\r\n");
       out.write("\t  \t<div class=\"container\">\r\n");
       out.write("\t  \t\r\n");
-      out.write("\t\t      <form class=\"form-login\" method=\"post\"     name=\"fmLogin\" action=\"signOn.jsp\"> \r\n");
+      out.write("\t\t      <form class=\"form-login\" method=\"post\"   name=\"fmLogin\" action=\"signOn.jsp\"> \r\n");
       out.write("\t\t        <h2 class=\"form-login-heading\">超樂漫畫-供應商管理系統</h2>\r\n");
       out.write("\t\t        <div class=\"login-wrap\">\r\n");
       out.write("                            <input type=\"hidden\" name=\"mode\" value=\"0\">\r\n");
@@ -78,7 +76,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t            <br>\r\n");
       out.write("\t\t            <input type=\"password\" name=\"txPassword\" id=\"txPassword\" class=\"form-control\" required  placeholder=\"Password\"><br>\r\n");
       out.write("\r\n");
-      out.write("\t\t            <button class=\"btn btn-theme02 btn-block\"    name=\"Submit\" type=\"submit\"  ><i class=\"fa fa-lock\"></i>&ensp;登入</button><br>\r\n");
+      out.write("\t\t            <button class=\"btn btn-theme02 btn-block\"    name=\"Submit\" type=\"submit\" ><i class=\"fa fa-lock\"></i>&ensp;登入</button><br>\r\n");
       out.write("\t\t\t\t\t\r\n");
       out.write("\t\t             <label class=\"checkbox text-center\">\t\t              \r\n");
       out.write("\t\t              <a data-toggle=\"modal\" href=\"login.jsp#myModal\"> 忘記密碼？</a>\t\r\n");
@@ -114,9 +112,9 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <script src=\"assets/js/jquery.js\"></script>\r\n");
       out.write("    <script src=\"assets/js/bootstrap.min.js\"></script>\r\n");
       out.write("    <script type=\"text/javascript\" src=\"assets/js/jquery.backstretch.min.js\"></script>\r\n");
-      out.write("    <script>        \r\n");
+      out.write("    <script>\r\n");
       out.write("        $.backstretch(\"assets/img/login-bg.jpg\", {speed: 500});\r\n");
-      out.write("    </script>  \r\n");
+      out.write("\t</script>  \r\n");
       out.write("\t \r\n");
       out.write("\r\n");
       out.write("  </body>\r\n");

@@ -31,8 +31,8 @@
     //填空區三 ,請注意:開始設定本程式程式的查詢邏輯
     String mainSQL = "SELECT * FROM vender ";                           // 預設查詢主體
     String countSQL = "SELECT count(*) AS count FROM vender  ";          // 預設查詢主體的資料庫數量SQL  
-    String defFilterSQLcomm = "  order by createDate desc ";     // 預設查詢-過濾主體的SQL  
-    String verFilterSQL = " WHERE    companyName  LIKE '%" + DBcomic.escapeString(searchkey) + "%' order by createDate desc"; // 變化組合的查詢條件SQL           
+    String defFilterSQLcomm = "where level=0  order by createDate desc ";     // 預設查詢-過濾主體的SQL  
+    String verFilterSQL = " WHERE level=0 and companyName  LIKE '%" + DBcomic.escapeString(searchkey) + "%' order by createDate desc"; // 變化組合的查詢條件SQL           
     // 組合過濾條件 :不需異動
     sqlFilter = (searchkey.length() == 0) ? defFilterSQLcomm : verFilterSQL;
     //取得主體資料庫資料數量 :不需異動
@@ -46,6 +46,8 @@
     WebPagination rPagination = new Bootstrap4RangePagination(numOfDatacount, currentPage,maxPagelist);
     rPagination.setUrlPattern(pgURL + "?" + httpRequest.getNewParameters());
 %>
+
+
 
 
 <!DOCTYPE html>
@@ -62,8 +64,14 @@
         <link rel="stylesheet" href="assets/css/main.css">
         <link rel="stylesheet" href="assets/css/owl.carousel.css">
         <link rel="stylesheet" href="assets/css/owl.transitions.css"> 
-        <link rel="stylesheet" href="assets/css/font-awesome.css">
-        <link rel="stylesheet" href="assets/css/fontawesome/css/all.min.css">
+        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" href="assets/font-awesome/css/all.min.css">
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
+    <link href="assets/css/table-responsive.css" rel="stylesheet">
+
 
     </head>
 
@@ -94,7 +102,7 @@
                             </a>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4 ">
-                            <h2 class="form-login-heading" style="color:red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=pgTitle%></h2>
+                            <h2 class="form-login-heading" style="color:red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;供應商管理系統</h2>
                         </div>
 
                     </div>
@@ -151,33 +159,9 @@
 
                                 <a class="btn btn-theme04" role="button" href="<%=addFunc%>"><%=addFuncDesc%></a> 
 
-
-                                <div class="btn-group pull-right mr-20">
-                                    <button type="button" class="btn btn-theme03">供應商分類查詢</button>
-                                    <button type="button" class="btn btn-theme03 dropdown-toggle" data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                        <span class="sr-only">Toggle Dropdown</span>
-                                    </button>
-                                    
-                                          <ul class="dropdown-menu" role="menu">
-                                                <li><a href="venderList.jsp">全部</a></li>
-                                                    <% // defcode 進入資料載入..... 
-                                                               commSQL = "SELECT * FROM defcode where   codeType='W' and      sno>0   ";
-                                                               ListResult companyTypeLists = DBcomic.execSql(commSQL );
-                                                                for (Map companyTypeList : companyTypeLists.getResult()) { 
-                                                    %>
-                                                <li><a href="venderList.jsp?companyType=<%=companyTypeList.get("codeType") %><%=companyTypeList.get("sno")%>" ><%=companyTypeList.get("codedesc")%></a></li>	
-                                                    <%
-                                                        }
-                                                    %> 
-
-
-                                            </ul>
-                                    
-                                </div> 
                             </form> 
                             <section id="no-more-tables">
-                                <table class="table table-bordered table-striped table-condensed cf" >
+                                <table class="table table-bordered table-striped table-condensed cf">
                                     <thead class="cf">
                                         <tr>
                                             <th>No.</th>
@@ -207,7 +191,15 @@
                                             <td data-title="公司類別"><%=  DBcomic.getCodeDescStr(vender.get("companyType").toString() )  %></td>
                                                             
                                             <td data-title="註冊日期"><%=vender.get("createDate")%></td>
-                                            <td data-title="狀態"><%=vender.get("status")%></td>
+                                            <td data-title="狀態">
+                                                <%
+                                                    if(vender.get("status").equals("0")){
+                                                        out.println("正常");
+                                                    }else{
+                                                        out.println("暫停");
+                                                    }
+                                                %>
+                                            </td>
                                             <td data-title="異動"> 
                                                 <div>
                                                     <a class="btn btn-primary btn-sm" role="button" href="<%=editFunc%><%=vender.get("pdVenderID")%>"><i class="fas fa-pen"></i><%=editFuncDesc%></a>

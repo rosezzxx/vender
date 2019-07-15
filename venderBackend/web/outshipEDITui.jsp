@@ -12,8 +12,8 @@
 <%    String orderID = request.getParameter("orderID");
 
     //填空區一 ,請注意:設定程式選單的主題
-    pgTitle = "出貨單明細";      // 作業名稱
-    funcTitle = "";                           // 功能名稱
+    pgTitle = "出貨單維護";      // 作業名稱
+    funcTitle = "明細更新";                           // 功能名稱
     pgURL = "outshipEDITui.jsp";        // 程式名稱   
     menuSno = "2";                     // 選單的群組之明細定義-請參考代碼自行修改各程式所屬的功能群組  
     maxPagelist = 5;
@@ -23,8 +23,8 @@
     //填空區三 ,請注意:開始設定本程式程式的查詢邏輯
     String mainSQL = "SELECT c.name1,b.amount,b.qty,b.total  FROM purchase a inner join purchase_list b on a.orderID=b.orderID inner join prod_base c on b.prodID=c.prodID  ";   // 預設查詢主體
     String countSQL = "SELECT count(*) as count  FROM purchase a inner join purchase_list b on a.orderID=b.orderID inner join prod_base c on b.prodID=c.prodID  ";   // 預設查詢主體的資料庫數量SQL  
-    String defFilterSQLcomm = " WHERE a.orderID='" + orderID + "' and c.pdVendorID='"+sysuserID+"' ";     // 預設查詢-過濾主體的SQL  
-    String verFilterSQL = " WHERE a.orderID='" + orderID + "' and c.pdVendorID='"+sysuserID+"'  order by orderID desc"; // 變化組合的查詢條件SQL   
+    String defFilterSQLcomm = " WHERE a.orderID='" + orderID + "' and c.pdVendorID='" + sysuserID + "' ";     // 預設查詢-過濾主體的SQL  
+    String verFilterSQL = " WHERE a.orderID='" + orderID + "' and c.pdVendorID='" + sysuserID + "'  order by orderID desc"; // 變化組合的查詢條件SQL   
 
     // 組合過濾條件 :不需異動
     sqlFilter = (searchkey.length() == 0) ? defFilterSQLcomm : verFilterSQL;
@@ -38,47 +38,43 @@
     // Pagenation 相關設定 2  :不需異動
     WebPagination rPagination = new Bootstrap4RangePagination(numOfDatacount, currentPage, maxPagelist);
     rPagination.setUrlPattern(pgURL + "?" + httpRequest.getNewParameters());
-    
-    System.out.println("SQL="+mainSQL + sqlFilter + pagination.getDbLimit());
-        
-    Date orderDate= new Date(); //訂貨日期
-    int recvAmount=50 ; //單品金額
+
+    System.out.println("SQL=" + mainSQL + sqlFilter + pagination.getDbLimit());
+
+    Date orderDate = new Date(); //訂貨日期
+    int recvAmount = 50; //單品金額
     String recvName = ""; //收貨人姓名
     String recvTel = ""; //收貨人電話
     String recvAddress = ""; //收貨人地址
     String recvareaNo = ""; //收貨人郵遞區號 
     String recvMemo = ""; //收貨人備註
-    String invoiceType =""; //發票聯別 
-    String invoiceSno =""; //發票統編 
-    String invoiceTitle =""; //發票抬頭 
-    String shipmentNo =""; //物流編號
- 
-    
-        
-    
-    ListResult purchaseResult = DBcomic.execSql("select *  from purchase WHERE orderID='"+orderID+"' ");
+    String invoiceType = ""; //發票聯別 
+    String invoiceSno = ""; //發票統編 
+    String invoiceTitle = ""; //發票抬頭 
+    String shipmentNo = ""; //物流編號
+
+    ListResult purchaseResult = DBcomic.execSql("select *  from purchase WHERE orderID='" + orderID + "' ");
     //numOfDatacount = (Long) purchaseResult.getResult().get(0).get("count");
     if (numOfDatacount == 0L) {
         // 無資料查詢  
         response.sendRedirect("./ErrorMessage.jsp?errorno=3&errorbackURL=outship.jsp");
         return;
     } else {
-        orderDate=  (Date) purchaseResult.getResult().get(0).get("orderDate"); //訂貨日期
-        recvAmount =(int) purchaseResult.getResult().get(0).get("recvAmount"); //應收總金額
-        recvName=(String) purchaseResult.getResult().get(0).get("recvName"); //收貨人姓名
-        recvTel=(String) purchaseResult.getResult().get(0).get("recvTel"); //收貨人電話
-        recvAddress=(String) purchaseResult.getResult().get(0).get("recvAddress"); //收貨人地址
-        recvareaNo=(String) purchaseResult.getResult().get(0).get("recvareaNo"); //收貨人郵遞區號
-        recvMemo=(String) purchaseResult.getResult().get(0).get("recvMemo"); //收貨人備註
-        invoiceType=(String) purchaseResult.getResult().get(0).get("invoiceType"); //發票聯別
-        invoiceSno=(String) purchaseResult.getResult().get(0).get("invoiceSno"); //發票統編
-        invoiceTitle=(String) purchaseResult.getResult().get(0).get("invoiceTitle"); //發票抬頭
-        shipmentNo=(String) purchaseResult.getResult().get(0).get("shipmentNo"); //物流編號
-        
+        orderDate = (Date) purchaseResult.getResult().get(0).get("orderDate"); //訂貨日期
+        recvAmount = (int) purchaseResult.getResult().get(0).get("recvAmount"); //應收總金額
+        recvName = (String) purchaseResult.getResult().get(0).get("recvName"); //收貨人姓名
+        recvTel = (String) purchaseResult.getResult().get(0).get("recvTel"); //收貨人電話
+        recvAddress = (String) purchaseResult.getResult().get(0).get("recvAddress"); //收貨人地址
+        recvareaNo = (String) purchaseResult.getResult().get(0).get("recvareaNo"); //收貨人郵遞區號
+        recvMemo = (String) purchaseResult.getResult().get(0).get("recvMemo"); //收貨人備註
+        invoiceType = (String) purchaseResult.getResult().get(0).get("invoiceType"); //發票聯別
+        invoiceSno = (String) purchaseResult.getResult().get(0).get("invoiceSno"); //發票統編
+        invoiceTitle = (String) purchaseResult.getResult().get(0).get("invoiceTitle"); //發票抬頭
+        shipmentNo = (String) purchaseResult.getResult().get(0).get("shipmentNo"); //物流編號
+
     }
 
-
-    String nextActionFunction="outshipEDITdata.jsp";
+    String nextActionFunction = "outshipEDITdata.jsp";
 
 %>
 <!DOCTYPE html>
@@ -97,6 +93,11 @@
         <link rel="stylesheet" href="assets/css/owl.transitions.css"> 
         <link rel="stylesheet" href="assets/css/font-awesome.css">
         <link rel="stylesheet" href="assets/css/fontawesome/css/all.min.css">
+        <link href="assets/css/bootstrap.css" rel="stylesheet">
+        <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link href="assets/css/style.css" rel="stylesheet">
+        <link href="assets/css/style-responsive.css" rel="stylesheet">
+        <link href="assets/css/table-responsive.css" rel="stylesheet">
 
     </head>
     <body class="book-home bg-gray">
@@ -126,7 +127,7 @@
                             </a>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4 ">
-                            <h2 class="form-login-heading" style="color:red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=pgTitle%></h2>
+                            <h2 class="form-login-heading" style="color:red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;供應商管理系統</h2>
                         </div>
 
                     </div>
@@ -168,7 +169,7 @@
 
         <div class="body-content">	
             <div class="container"> 
-                <div class="row"><div class="col-sm-6"></div><br/></div>
+                <h3><%=pgTitle%> <i class="fa fa-angle-right"></i>&nbsp; <%=funcTitle%></h3>
                 <div class="row mt">
                     <div class="col-lg-12">
                         <div class="content-panel">
@@ -190,28 +191,6 @@
                                 </div> 
 
 
-                                <div class="btn-group pull-right mr-20">
-                                    <button type="button" class="btn btn-theme03">供應商分類查詢</button>
-                                    <button type="button" class="btn btn-theme03 dropdown-toggle" data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                        <span class="sr-only">Toggle Dropdown</span>
-                                    </button>
-
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="venderList.jsp">全部</a></li>
-                                            <% // defcode 進入資料載入.....      commSQL = "SELECT * FROM defcode where   codeType='W' and      sno>0   ";
-                                                ListResult companyTypeLists = DBcomic.execSql(commSQL);
-                                                for (Map companyTypeList : companyTypeLists.getResult()) {
-                                            %>
-                                        <li><a href="venderList.jsp?companyType=<%=companyTypeList.get("codeType")%><%=companyTypeList.get("sno")%>" ><%=companyTypeList.get("codedesc")%></a></li>	
-                                            <%
-                                                }
-                                            %> 
-
-
-                                    </ul>
-
-                                </div> 
                             </form> 
                             <section id="no-more-tables">
                                 <table class="table table-bordered table-striped table-condensed cf">
@@ -239,146 +218,145 @@
                                             <td data-title="小計金額"><%=outship.get("total")%> </td>
 
                                         </tr>
-                                        <%}  %> 
-                                        
-                                        
+                                        <%}%> 
+
+
                                     </tbody>
                                 </table>
                             </section>
-                                        
+
                             <form class="form-horizontal style-form" method="post"   name="fm"  action="<%=nextActionFunction%>">
-                                <div class="form-group">
-                                    <span class="badge bg-success" style="font-size:20px;">收件人資料</span><br/>
-                                     <table  class="table table-bordered table-striped table-condensed cf">
-                                         <tr>
-                                            <td width="15%">姓名</td>
-                                            <td><%=recvName%></td>
-                                         </tr>
-                                         <tr>
-                                            <td>行動電話</td>
-                                            <td><%=recvTel%></td>
-                                         </tr>
-                                         <tr>
-                                            <td>郵遞區號</td>
-                                            <td><%=recvareaNo%></td>
-                                         </tr>
-                                          <tr>
-                                            <td>地址1</td>
-                                            <td><%=recvAddress%></td>
-                                         </tr>
-                                         <tr>
-                                            <td>收貨人備註</td>
-                                            <td><%=recvMemo%></td>
-                                         </tr>
-                                     </table>
-                                </div> 
-                                
-                                 <div class="form-group">
-                                    <span class="badge bg-success" style="font-size:20px;">發票資訊</span><br/>
-                                     <table  class="table table-bordered table-striped table-condensed cf">
-                                         <tr>
-                                            <td width="15%">發票格式</td>
-                                            <td><%=invoiceType%>聯</td>
-                                         </tr>
-                                         <tr>
-                                            <td>發票統編</td>
-                                            <td><%=invoiceSno%></td>
-                                         </tr>
-                                          <tr>
-                                            <td>發票抬頭</td>
-                                            <td><%=invoiceTitle%></td>
-                                         </tr>
-                                     </table>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <span class="badge bg-success" style="font-size:20px;">運送方式</span><br/>
-                                     <table  class="table table-bordered table-striped table-condensed cf">
-                                         <tr>
-                                            <td width="15%">宅配</td>
-                                         
-                                            <td>台灣黑貓宅急便（追蹤號碼：<input type="text" name="shipmentNo" value="<%=shipmentNo%>">）</td>
-                                         </tr>
-                                         
-                                     </table>
-                                </div>
-                                
-                                         
+
+                                <span class="badge bg-success" style="font-size:20px;">收件人資料</span><br/>
+                                <table  class="table table-bordered table-striped table-condensed cf">
+                                    <tr>
+                                        <td width="15%">姓名</td>
+                                        <td><%=recvName%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>行動電話</td>
+                                        <td><%=recvTel%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>郵遞區號</td>
+                                        <td><%=recvareaNo%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>地址1</td>
+                                        <td><%=recvAddress%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>收貨人備註</td>
+                                        <td><%=recvMemo%></td>
+                                    </tr>
+                                </table>
+
+
+
+                                <span class="badge bg-success" style="font-size:20px;">發票資訊</span><br/>
+                                <table  class="table table-bordered table-striped table-condensed cf">
+                                    <tr>
+                                        <td width="15%">發票格式</td>
+                                        <td><%=invoiceType%>聯</td>
+                                    </tr>
+                                    <tr>
+                                        <td>發票統編</td>
+                                        <td><%=invoiceSno%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>發票抬頭</td>
+                                        <td><%=invoiceTitle%></td>
+                                    </tr>
+                                </table>
+
+
+
+                                <span class="badge bg-success" style="font-size:20px;">運送方式</span><br/>
+                                <table  class="table table-bordered table-striped table-condensed cf">
+                                    <tr>
+                                        <td width="15%">宅配</td>
+
+                                        <td>台灣黑貓宅急便（追蹤號碼：<input type="text" name="shipmentNo" value="<%=shipmentNo%>">）</td>
+                                    </tr>
+
+                                </table>
+
+
+
                                 <%
-                                    
-                                    ListResult shipsel = DBcomic.execSql("select *,count(*) as count from shiporder  where orderID='"+ orderID +"'  ; " );
-                                     
-                                    Date shiporderDate=null;
-                                    String shipMemo="";
-                                    
-                                    Long count=(Long)shipsel.getResult().get(0).get("count");
-                                    if(count != 0L){
-                                        shiporderDate=(Date) shipsel.getResult().get(0).get("shiporderDate"); //預計出貨日期                                    
-                                        shipMemo=(String) shipsel.getResult().get(0).get("shipMemo"); //出貨備註 
+
+                                    ListResult shipsel = DBcomic.execSql("select *,count(*) as count from shiporder  where orderID='" + orderID + "'  ; ");
+
+                                    Date shiporderDate = null;
+                                    String shipMemo = "";
+
+                                    Long count = (Long) shipsel.getResult().get(0).get("count");
+                                    if (count != 0L) {
+                                        shiporderDate = (Date) shipsel.getResult().get(0).get("shiporderDate"); //預計出貨日期                                    
+                                        shipMemo = (String) shipsel.getResult().get(0).get("shipMemo"); //出貨備註 
                                     }
-                                    
-                                    
+
 
                                 %>
-                                 <div class="form-group">
-                                    <span class="badge bg-success" style="font-size:20px;">出貨進度</span><br/>
-                                     <table  class="table table-bordered table-striped table-condensed cf">
-                                         <tr>
-                                            <td width="15%">預計出貨日期</td>
-                                            <td><input type="date" value="<%=shiporderDate%>" name="shiporderDate"></td>
-                                         </tr>
-                                          <tr>
-                                            <td width="15%">出貨狀態</td>
-                                            <td>
-                                                 <% String sta= (String) purchaseResult.getResult().get(0).get("traceStatus"); %>
+
+                                <span class="badge bg-success" style="font-size:20px;">出貨進度</span><br/>
+                                <table  class="table table-bordered table-striped table-condensed cf">
+                                    <tr>
+                                        <td width="15%">預計出貨日期</td>
+                                        <td><input type="date" value="<%=shiporderDate%>" name="shiporderDate"></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="15%">出貨狀態</td>
+                                        <td>
+                                            <% String sta = (String) purchaseResult.getResult().get(0).get("traceStatus"); %>
                                             <select name="traceStatus">
-                                                   <% // defcode 進入資料載入..... 
-                                                       System.out.println("sta==="+sta);
-                                                        commSQL = "SELECT * FROM defcode where  codeType='D' and   sno>0   ";
-                                                        ListResult defcode__D = DBcomic.execSql(commSQL );
-                                                        for (Map defcode_D : defcode__D.getResult()) {
-                                                           
-                                                            if(sta.equals(defcode_D.get("codeType")+""+defcode_D.get("sno"))){
-                                                                
-                                                    %>
-                                                                <option value="<%=defcode_D.get("codeType") %><%=defcode_D.get("sno")%>" selected><%=defcode_D.get("codedesc") %>
+                                                <% // defcode 進入資料載入..... 
+                                                    System.out.println("sta===" + sta);
+                                                    commSQL = "SELECT * FROM defcode where  codeType='D' and   sno>0   ";
+                                                    ListResult defcode__D = DBcomic.execSql(commSQL);
+                                                    for (Map defcode_D : defcode__D.getResult()) {
+
+                                                        if (sta.equals(defcode_D.get("codeType") + "" + defcode_D.get("sno"))) {
+
+                                                %>
+                                                <option value="<%=defcode_D.get("codeType")%><%=defcode_D.get("sno")%>" selected><%=defcode_D.get("codedesc")%>
                                                     <%
-                                                            }else{ 
+                                                    } else {
                                                     %>
-                                                                <option value="<%=defcode_D.get("codeType") %><%=defcode_D.get("sno")%>"><%=defcode_D.get("codedesc") %>
+                                                <option value="<%=defcode_D.get("codeType")%><%=defcode_D.get("sno")%>"><%=defcode_D.get("codedesc")%>
                                                     <%
                                                             }
                                                         }
                                                     %> 
-                                                                                                       
+
                                             </select>
-                                            </td>
-                                         </tr>
-                                          <tr>
-                                            <td width="15%">出貨備註</td>
-                                            <td><textarea rows="5" cols="30" name="shipMemo"><%=shipMemo%></textarea></td>
-                                         </tr>
-                                     </table>
-                                </div>       
-                                 
-                                        <input type="hidden" value="<%=recvName%>" name="recvName">
-                                        <input type="hidden" value="<%=recvTel%>" name="recvTel">
-                                        <input type="hidden" value="<%=recvareaNo%>" name="recvareaNo">
-                                        <input type="hidden" value="<%=recvAddress%>" name="recvAddress">
-                                        <input type="hidden" value="<%=recvMemo%>" name="recvMemo">
-                                        <input type="hidden" value="<%=invoiceType%>" name="invoiceType">
-                                        <input type="hidden" value="<%=invoiceSno%>" name="invoiceSno">
-                                        <input type="hidden" value="<%=invoiceTitle%>" name="invoiceTitle">
-                                        <input type="hidden" name="orderID" value="<%=orderID%>">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="15%">出貨備註</td>
+                                        <td><textarea rows="5" cols="30" name="shipMemo"><%=shipMemo%></textarea></td>
+                                    </tr>
+                                </table>
+
+
+                                <input type="hidden" value="<%=recvName%>" name="recvName">
+                                <input type="hidden" value="<%=recvTel%>" name="recvTel">
+                                <input type="hidden" value="<%=recvareaNo%>" name="recvareaNo">
+                                <input type="hidden" value="<%=recvAddress%>" name="recvAddress">
+                                <input type="hidden" value="<%=recvMemo%>" name="recvMemo">
+                                <input type="hidden" value="<%=invoiceType%>" name="invoiceType">
+                                <input type="hidden" value="<%=invoiceSno%>" name="invoiceSno">
+                                <input type="hidden" value="<%=invoiceTitle%>" name="invoiceTitle">
+                                <input type="hidden" name="orderID" value="<%=orderID%>">
 
 
                                 <div class="row text-center wow fadeInUp">
                                     <div class="outer-ss">
                                         <a href="javascript: document.fm.submit();" class="btn btn-pink"  ><i class="fa fa-check" > </i>&ensp;確認</a>
-                                        <a href="javascript: history.back();" class="btn btn-pink"  ><i class="fa fa-sign-out" > </i>&ensp;返回</a>                                
+                                        <a href="javascript: history.back();" class="btn btn-black"><i class="fa fa-sign-out" > </i>&ensp;返回</a>                                
                                     </div>     
                                 </div> 
-                                
+
                             </form>
                             <div class="pages text-center">
                                 <div class="btn-group"> 

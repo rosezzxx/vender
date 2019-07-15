@@ -15,13 +15,11 @@
                                      out.print ("<li>");
                                  }   
                         %>
-                              <% if (menuSno.equals("1"))  {  %>
-                                     <a href="<%=vender_func.get("funcURL")+"?pdVenderID="+sysuserID %>"><i class="fa fa-sign-out">&nbsp;<%=vender_func.get("funcdesc") %></i></a>
-                              <% } else if (menuSno.equals("2"))  { %>
-                                     <a href="<%=vender_func.get("funcURL") %>"><i class="fa fa-sign-out">&nbsp;<%=vender_func.get("funcdesc") %></i></a>
-                               <%} else { %>
+                              <% //if ((Integer)vender_func.get("sno")==1)  {  %>
+                                     <!--<a href="<%=vender_func.get("funcURL")+"?pdVenderID="+sysuserID %>"><i class="fa fa-sign-out">&nbsp;<%=vender_func.get("funcdesc") %></i></a>-->
+                               <%//} else {%>
                                        <a href="<%=vender_func.get("funcURL")%>"><i class="fa fa-sign-out">&nbsp;<%=vender_func.get("funcdesc") %></i></a>
-                               <%} %>
+                               <%//} %>
  
 
                          </li> 

@@ -16,8 +16,6 @@
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
     <link href="assets/css/table-responsive.css" rel="stylesheet"> 
-    
-    
   </head> 
 
   <body>
@@ -25,7 +23,7 @@
 	  	  <div id="login-page">
 	  	<div class="container">
 	  	
-		      <form class="form-login" method="post"     name="fmLogin" action="signOn.jsp"> 
+		      <form class="form-login" method="post"   name="fmLogin" action="signOn.jsp"> 
 		        <h2 class="form-login-heading">超樂漫畫-供應商管理系統</h2>
 		        <div class="login-wrap">
                             <input type="hidden" name="mode" value="0">
@@ -34,7 +32,7 @@
 		            <br>
 		            <input type="password" name="txPassword" id="txPassword" class="form-control" required  placeholder="Password"><br>
 
-		            <button class="btn btn-theme02 btn-block"    name="Submit" type="submit"  ><i class="fa fa-lock"></i>&ensp;登入</button><br>
+		            <button class="btn btn-theme02 btn-block"    name="Submit" type="submit" ><i class="fa fa-lock"></i>&ensp;登入</button><br>
 					
 		             <label class="checkbox text-center">		              
 		              <a data-toggle="modal" href="login.jsp#myModal"> 忘記密碼？</a>	
@@ -70,9 +68,9 @@
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
-    <script>        
+    <script>
         $.backstretch("assets/img/login-bg.jpg", {speed: 500});
-    </script>  
+	</script>  
 	 
 
   </body>

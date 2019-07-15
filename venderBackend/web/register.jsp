@@ -5,8 +5,10 @@
     Author     : user
 --%>
 <%@include file="./utility/pageInit.jsp" %>
-<%
-    menuSno = "2";                 // 選單的群組之明細定義-請參考代碼自行修改各程式所屬的功能群組 
+<%  
+    menuSno = "1";                 // 選單的群組之明細定義-請參考代碼自行修改各程式所屬的功能群組 
+    pgTitle = "供應商基本資料";               // 作業名稱
+    funcTitle = "新增";                                // 功能名稱
 %>   
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
@@ -62,7 +64,7 @@
                             </a>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
-                            <h2 class="form-login-heading" style="color:red">供應商管理系統-註冊</h2>
+                            <h2 class="form-login-heading" style="color:red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;供應商管理系統</h2>
                         </div>
 
                     </div>
@@ -104,9 +106,7 @@
 
         <div class="body-content">
             <div class="container">
-                <div class="row">
-                    <div class="col-sm-6"><br/></div>
-                </div>
+                <h3><%=pgTitle%> <i class="fa fa-angle-right"></i>&nbsp; <%=funcTitle%></h3>
                 <div class="form-panel">
                     <form class="form-horizontal style-form" method="post"   name="fm"  action="<%=nextActionFunction%>">
                         <div class="auth-page">
@@ -158,7 +158,16 @@
 
                                 <div class="col-sm-6">
 
+                                    <div class="form-group">
 
+                                        <label class="col-sm-4 col-sm-6 control-label">供應商狀態*</label>
+                                        <div class="col-sm-6">
+                                            <select class="form-control" name="status">
+                                                <option value="0" selected="true">正常</option>
+                                                <option value="1">暫停</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label class="col-sm-4 col-sm-6 control-label">供應商聯絡人 *</label>
                                         <div class="col-sm-6">
@@ -193,8 +202,8 @@
                         </div>
                         <div class="row text-center wow fadeInUp">
                             <div class="outer-ss">
-                                <a href="#" class="btn btn-black"><i class="fas fa-pencil-alt"></i>&ensp;重填</a>
-                                <a href="javascript: document.fm.submit();" class="btn btn-pink"  ><i class="fas fa-check" > </i>&ensp;確認</a>
+                                <a href="javascript: document.fm.submit();" class="btn btn-pink"  ><i class="fa fa-check" > </i>&ensp;確認</a>
+                                <a href="javascript: history.back();" class="btn btn-black"><i class="fa fa-sign-out"></i>&ensp;返回</a>
                             </div>     
                         </div>
                     </form>

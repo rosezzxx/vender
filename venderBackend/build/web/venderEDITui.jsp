@@ -10,20 +10,16 @@
     String pdVenderID = request.getParameter("pdVenderID");
     String Mode =  request.getParameter("Mode");
     
+    pgTitle = "供應商基本資料";               // 作業名稱
+    funcTitle = "修改";                                // 功能名稱
+    
      if (Mode==null)        
      {    
          Mode="0";  //代表非系統使用者
          menuSno = "1";
      }
     else      
-      menuSno = "2";
-     
-    
-    pgTitle = "供應商基本資料";               // 作業名稱
-    funcTitle = "更新";                                // 功能名稱
-    pgURL = "";                                    // 返回程式名稱   
-    menuSno = "1";                            // 選單的群組之明細定義-請參考代碼自行修改各程式所屬的功能群組  
-    
+      menuSno = "1";
     String Password = "";
     String Name = "";
     String Email = "";
@@ -33,10 +29,15 @@
     String UniformNo = "";
     String CompanyName = "";
     String CompanyType = "";
-    
-    
 
-    ListResult defcodeResult = DBcomic.execSql("SELECT   *,count(*) as count FROM vender where  pdVenderID=" + pdVenderID);
+    String vender_select="";
+    if(pdVenderID!=null){
+        vender_select="SELECT   password,name,email,mobilno,areano,address,uniformno,companyname,companyType,count(*) as count FROM vender where  pdVenderID="+pdVenderID;
+    }else{
+        vender_select="SELECT   password,name,email,mobilno,areano,address,uniformno,companyname,companyType,count(*) as count FROM vender where  pdVenderID="+sysuserID;
+    }
+    
+    ListResult defcodeResult = DBcomic.execSql(vender_select);
     numOfDatacount = (Long) defcodeResult.getResult().get(0).get("count");
     if (numOfDatacount == 0L) {
         // 無資料查詢  
@@ -70,13 +71,15 @@
         <link rel="stylesheet" href="assets/css/main.css">
         <link rel="stylesheet" href="assets/css/owl.carousel.css">
         <link rel="stylesheet" href="assets/css/owl.transitions.css">
-        <link rel="stylesheet" href="assets/css/font-awesome.css">
+
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+        <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        
 
 
     </head>
-    <%        
-        String nextActionFunction = "venderEDITdata.jsp";
+    <%        String nextActionFunction = "venderEDITdata.jsp";
+
     %>
     <body class="book-home bg-gray">
         <header class="header-style-1">
@@ -103,7 +106,7 @@
                             </a>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
-                            <h2 class="form-login-heading" style="color:red"><%=pgTitle%> --> <%=funcTitle%> </h2>
+                            <h2 class="form-login-heading" style="color:red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;供應商管理系統</h2>
                         </div>
 
                     </div>
@@ -146,9 +149,7 @@
 
         <div class="body-content">
             <div class="container">
-                <div class="row">
-                    <div class="col-sm-6"><br/></div>
-                </div>
+                <h3><%=pgTitle%> <i class="fa fa-angle-right"></i>&nbsp; <%=funcTitle%></h3>
                 <div class="form-panel">
                     <form class="form-horizontal style-form" method="post"   name="fm"  action="<%=nextActionFunction%>">
                         <div class="auth-page">
@@ -156,7 +157,7 @@
                                 <div class="col-sm-6"> 
                                     <div class="form-group">
                                         <label class="col-sm-4 col-sm-6 control-label">帳號(電子信箱) *</label>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6"> 
                                             <input type="hidden"  name="pdVenderID"  value="<%=pdVenderID%>" >
                                             <input type="hidden"  name="Mode"  value="<%=Mode%>" >
                                             <input type="text" class="form-control" name="Email"  value="<%=Email%>" required>
@@ -236,8 +237,10 @@
                         </div>
                         <div class="row text-center wow fadeInUp">
                             <div class="outer-ss">
-                                <a href="javascript: document.fm.reset();" class="btn btn-black"><i class="fa fa-pencil-alt"></i>&ensp;重填</a>
-                                <a href="javascript: document.fm.submit();" class="btn btn-pink"  ><i class="fa fa-check" > </i>&ensp;確認</a>                                
+                                    <a href="javascript: document.fm.submit();" class="btn btn-pink"  ><i class="fa fa-check"> </i>&ensp;確認</a>
+                                <%if(Mode.equals("1")){%>
+                                    <a href="javascript: history.back();" class="btn btn-black"><i class="fa fa-sign-out"></i>&ensp;返回</a>
+                                <%}%>
                             </div>     
                         </div>
                     </form>

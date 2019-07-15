@@ -48,7 +48,6 @@
                 session.setAttribute("sysuserID","");  
                 session.setAttribute("userLevel",userLevel);  
                 session.setAttribute("menumode",userLevel);   
-              
                 response.sendRedirect("venderList.jsp" ); 
       }
       else
@@ -85,7 +84,12 @@
                  session.setAttribute("sysuserID",userID);  
                  session.setAttribute("userLevel" ,rolelevel);   //  2019-04-11 新增使用者權限 
                  session.setAttribute("menumode",userLevel);   
-                 response.sendRedirect(successURL+"?pdVenderID="+userID); 
+                 if(rolelevel.equals("5")){
+                    response.sendRedirect("vender_func.jsp"); 
+                 }else{
+                    response.sendRedirect(successURL+"?pdVenderID="+userID); 
+                 }
+                 
           }
           else {
                   out.println( "【問題來自於: "+pgName+"】: "+venderResults.getErrorMessage());

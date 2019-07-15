@@ -18,7 +18,7 @@
     pgURL = "vender_baseEDITdata.jsp";                                    // 程式名稱   
     menuSno = "3";                            // 選單的群組之明細定義-請參考代碼自行修改各程式所屬的功能群組  
 
-    String backFuncDesc = "&nbsp;回供應商後台功能選單設定";
+    String backFuncDesc = "&nbsp;回供應商商品設定";
     String backFunc = "vender_base.jsp";
 
     /*---------------------------------------------------------------------*/
@@ -99,7 +99,7 @@
                             </a>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
-                            <h2 class="form-login-heading" style="color:red">供應商管理系統</h2>
+                            <h2 class="form-login-heading" style="color:red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;供應商管理系統</h2>
                         </div>
 
                     </div>

@@ -19,7 +19,7 @@
  /* 請注意: 如果有其他參數，照樣要組合 verFilterSQL                      */
  /*-------------------------------------------------------------------*/
     //填空區一 ,請注意:設定程式選單的主題
-    pgTitle = "出貨資訊";               // 作業名稱
+    pgTitle = "出貨單維護";               // 作業名稱
     funcTitle = "";                                // 功能名稱
     pgURL = "outshipEDITdata.jsp";                                    // 返回程式名稱   
     menuSno = "1";                            // 選單的群組之明細定義-請參考代碼自行修改各程式所屬的功能群組  
@@ -148,7 +148,7 @@
                             </a>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
-                            <h2 class="form-login-heading" style="color:red"><%=pgTitle%></h2>
+                            <h2 class="form-login-heading" style="color:red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;供應商管理系統</h2>
                         </div>
 
                     </div>
@@ -200,11 +200,11 @@
                         <div class="form-panel">                
                             <h4 style="color: crimson" class="text-center txt-padding">
                                 <%=SaveMessage%></h4>
-                          <div><br/><br/><br/></div>
+                            <div><br/><br/><br/></div>
                             <div class="form-group add-task-row text-center">
                                 <a class="btn btn-default" href="<%=backFunc%>"><i class="fa fa-reply "></i><%=backFuncDesc%></a>
                             </div> 
-                            
+
                         </div>
                     </div>
                 </div> 

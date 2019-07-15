@@ -92,7 +92,7 @@
                             </a>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
-                            <h2 class="form-login-heading" style="color:red"><%=pgTitle%></h2>
+                            <h2 class="form-login-heading" style="color:red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;供應商管理系統</h2>
                         </div>
 
                     </div>

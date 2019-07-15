@@ -30,15 +30,15 @@
     String UniformNo = request.getParameter("UniformNo");
     String CompanyName = request.getParameter("CompanyName");
     String CompanyType = request.getParameter("CompanyType");
-
+    String status = request.getParameter("status");
+    
     String SaveMessage = "";
     String backFuncDesc = "返前頁";
     String backFunc = "login.jsp";
     if (Mode.equals("1")) {
         backFunc = "venderList.jsp";
-         menuSno = "2"; 
+         menuSno = "1"; 
     }
-
     //取得主體資料庫資料數量 :不需異動
     /*
         ListResult dataCount = DBcomic.execSql(countSQL + defFilterSQLcomm);
@@ -58,11 +58,11 @@
     commSQL = "INSERT   vender    ( email,password,";
     commSQL = commSQL + "name,mobilno,";
     commSQL = commSQL + "areaNo,address,uniformNo,";
-    commSQL = commSQL + "companyName,companyType,createDate) ";
+    commSQL = commSQL + "status,companyName,companyType,createDate) ";
     commSQL = commSQL + " VALUES (" + DBcomic.psString(Email) + "," + DBcomic.psString(Password) + ",";
     commSQL = commSQL + DBcomic.psString(Name) + "," + DBcomic.psString(Mobilno) + ",";
     commSQL = commSQL + DBcomic.psString(AreaNo) + "," + DBcomic.psString(Address) + "," + DBcomic.psString(UniformNo) + ",";
-    commSQL = commSQL + DBcomic.psString(CompanyName) + "," + DBcomic.psString(CompanyType) + ",sysdate() );";
+    commSQL = commSQL + DBcomic.psString(status) + ","+ DBcomic.psString(CompanyName) + "," + DBcomic.psString(CompanyType) + ",sysdate() );";
     ListResult insertResult = DBcomic.UpdatePsSql(commSQL);
     if (insertResult.getErrorMessage() == null) {
         SaveMessage = pgTitle + "-" + funcTitle + insertResult.getResult().get(0).get("count") + " 筆  成功  !!";
@@ -125,7 +125,7 @@
                             </a>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
-                            <h2 class="form-login-heading" style="color:red">供應商管理系統</h2>
+                            <h2 class="form-login-heading" style="color:red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;供應商管理系統</h2>
                         </div>
 
                     </div>

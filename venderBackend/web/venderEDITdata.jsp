@@ -32,10 +32,17 @@
     String CompanyName = request.getParameter("CompanyName");
     String CompanyType = request.getParameter("CompanyType");
 
+
+    
+    
     String SaveMessage = "";
     String backFuncDesc = "返前頁";
-    String backFunc = "venderList.jsp?Mode="+Mode+"&pdVenderID=" + pdVenderID;
-    if (Mode != null) {
+    String backFunc = "venderEDITui.jsp?pdVenderID=" + pdVenderID;
+    
+    //Mode  0:使用者；1:管理者
+    if(Mode.equals("0")) {
+        pdVenderID=sysuserID;
+    }else{
         backFunc = "venderList.jsp";
     }
 
@@ -72,8 +79,6 @@
     } else {
         SaveMessage = pgTitle + "-" + funcTitle + " 失敗  !! <br/>" + "失敗原因:" + updateResult.getErrorMessage();
     }
-
-
 %>
 
 
@@ -123,7 +128,7 @@
                             </a>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
-                            <h2 class="form-login-heading" style="color:red"><%=pgTitle%></h2>
+                            <h2 class="form-login-heading" style="color:red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;供應商管理系統</h2>
                         </div>
 
                     </div>

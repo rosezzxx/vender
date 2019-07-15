@@ -83,7 +83,7 @@
                             </a>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
-                            <h2 class="form-login-heading" style="color:red">供應商管理系統 </h2>
+                            <h2 class="form-login-heading" style="color:red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;供應商管理系統</h2>
                         </div>
 
                     </div>
@@ -126,9 +126,7 @@
 
         <div class="body-content">
             <div class="container">
-                <div class="row">
-                    <div class="col-sm-6"><br/></div>
-                </div>
+                <h3><%=pgTitle%> <i class="fa fa-angle-right"></i>&nbsp; <%=funcTitle%></h3>
                 <div class="form-panel">
                     <form class="form-horizontal style-form" method="post"   name="fm"  action="<%=nextActionFunction%>">
                         <div class="auth-page">
@@ -158,8 +156,8 @@
                 </div>
                 <div class="row text-center wow fadeInUp">
                     <div class="outer-ss">
-                        <a href="#" class="btn btn-black"><i class="fa fa-pencil-square-o"></i>&ensp;重填</a>
-                        <a href="javascript: document.fm.submit();" class="btn btn-pink"  ><i class="fa fa-check"> </i>&ensp;確認</a>
+                        <a href="javascript: document.fm.submit();" class="btn btn-pink"><i class="fa fa-check"> </i>&ensp;確認</a>
+                        <a href="javascript: history.back();" class="btn btn-black"><i class="fa fa-sign-out"></i>&ensp;返回</a>
                     </div>     
                 </div>
                 </form>
