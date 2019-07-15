@@ -40,7 +40,7 @@
     String mainSQL = "SELECT distinct a.orderID,a.orderDate,a.recvName,a.recvAddress,a.recvTel,a.traceStatus,c.pdVendorID FROM purchase a inner join purchase_list b on a.orderID=b.orderID inner join prod_base c on b.prodID=c.prodID   "; // 預設查詢主體
     String countSQL = "SELECT count(distinct a.orderID) as count FROM purchase a inner join purchase_list b on a.orderID=b.orderID inner join prod_base c on b.prodID=c.prodID "; // 預設查詢主體的資料庫數量SQL  
     String defFilterSQLcomm = " WHERE c.pdVendorID='"+sysuserID+"' order by a.orderID ";     // 預設查詢-過濾主體的SQL  
-    String verFilterSQL = "     WHERE c.pdVendorID='"+sysuserID+"' order by a.orderID "; // 變化組合的查詢條件SQL           
+    String verFilterSQL = "     WHERE c.pdVendorID='"+sysuserID+"' and (a.orderID  LIKE '%" + DBcomic.escapeString(searchkey) + "%' or a.recvName like '%" + DBcomic.escapeString(searchkey) + "%' or a.recvAddress like '%" + DBcomic.escapeString(searchkey) + "%' or a.recvTel like '%" + DBcomic.escapeString(searchkey) + "%') order by a.orderID  "; // 變化組合的查詢條件SQL           
      
     
     // 組合過濾條件 :不需異動
@@ -56,8 +56,9 @@
     WebPagination rPagination = new Bootstrap4RangePagination(numOfDatacount, currentPage,maxPagelist);
     rPagination.setUrlPattern(pgURL + "?" + httpRequest.getNewParameters());
     
+    System.out.println("sql="+mainSQL + sqlFilter + pagination.getDbLimit());
     
-
+   
 %>
 <!DOCTYPE html>
 <html>
@@ -216,27 +217,21 @@
                                             <td data-title="聯絡電話"><%=outship.get("recvTel").toString().replace(searchkey, "<span class=\"text-danger\">" + searchkey + "</span>")%> </td>                                                            
                                             <td data-title="狀態">
                                                <% String sta= outship.get("traceStatus").toString();  %>
-                                               <select>
+                                               
                                                    <% // defcode 進入資料載入..... 
                                                         commSQL = "SELECT * FROM defcode where  codeType='D' and   sno>0   ";
                                                         ListResult defcode__D = DBcomic.execSql(commSQL );
-                                                        for (Map defcode_D : defcode__D.getResult()) {
-                                                           
+                                                        for (Map defcode_D : defcode__D.getResult()) {                                                           
                                                             if(sta.equals(defcode_D.get("codeType")+""+defcode_D.get("sno"))){
-                                                                
                                                     %>
-                                                                <option value="<%=defcode_D.get("codeType") %><%=defcode_D.get("sno")%>" selected><%=defcode_D.get("codedesc") %>
+                                                                 <%=defcode_D.get("codedesc") %>
                                                     <%
-                                                            }else{ 
-                                                    %>
-                                                                <option value="<%=defcode_D.get("codeType") %><%=defcode_D.get("sno")%>"><%=defcode_D.get("codedesc") %>
-                                                    <%
-                                                            }
+                                                            } 
                                                         }
                                                     %> 
-                                                                                                       
-                                                </select>
+                                               
                                             </td>
+                                             
                                             
                                             <td data-title="異動"> 
                                                 <div>

@@ -76,9 +76,8 @@
        
     } else {
        commSQL = "UPDATE shiporder SET shiporderDate=" + DBcomic.psString(shiporderDate) + ",  traceStatus=" + DBcomic.psString(traceStatus) + ", shipMemo=" + DBcomic.psString(shipMemo) + "  ";
-       commSQL = commSQL + " WHERE  orderID=" + DBcomic.psString(orderID);
+       commSQL = commSQL + " WHERE  orderID=" + DBcomic.psString(orderID)+" ; ";
        
-      
         ListResult updateResult = DBcomic.UpdatePsSql(commSQL);
         if (updateResult.getErrorMessage() == null) {
             SaveMessage = pgTitle + "---" + funcTitle + updateResult.getResult().get(0).get("count") + " 筆  成功  !!";
@@ -89,7 +88,7 @@
         
     }
     
-    commSQL=" UPDATE `purchase` SET `shipmentNo` = "+DBcomic.psString(shipmentNo)+"  WHERE `purchase`.`orderID` = '" + orderID + "' ;";
+    commSQL=" UPDATE `purchase` SET `shipmentNo` = "+DBcomic.psString(shipmentNo)+" ,  traceStatus=" + DBcomic.psString(traceStatus) + " WHERE `purchase`.`orderID` = '" + orderID + "' ;";
    
     
     ListResult updateResult = DBcomic.UpdatePsSql(commSQL);

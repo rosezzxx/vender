@@ -43,18 +43,18 @@
         
     Date orderDate= new Date(); //訂貨日期
     int recvAmount=50 ; //單品金額
-    String recvName = "1"; //收貨人姓名
-    String recvTel = "2"; //收貨人電話
-    String recvAddress = "3"; //收貨人地址
-    String recvareaNo = "4"; //收貨人郵遞區號 
-    String recvMemo = "5"; //收貨人備註
-    String invoiceType ="6"; //發票聯別 
-    String invoiceSno ="7"; //發票統編 
-    String invoiceTitle ="8"; //發票抬頭 
-    String shipmentNo ="9"; //物流編號
+    String recvName = ""; //收貨人姓名
+    String recvTel = ""; //收貨人電話
+    String recvAddress = ""; //收貨人地址
+    String recvareaNo = ""; //收貨人郵遞區號 
+    String recvMemo = ""; //收貨人備註
+    String invoiceType =""; //發票聯別 
+    String invoiceSno =""; //發票統編 
+    String invoiceTitle =""; //發票抬頭 
+    String shipmentNo =""; //物流編號
  
-   
     
+        
     
     ListResult purchaseResult = DBcomic.execSql("select *  from purchase WHERE orderID='"+orderID+"' ");
     //numOfDatacount = (Long) purchaseResult.getResult().get(0).get("count");
@@ -333,6 +333,7 @@
                                                  <% String sta= (String) purchaseResult.getResult().get(0).get("traceStatus"); %>
                                             <select name="traceStatus">
                                                    <% // defcode 進入資料載入..... 
+                                                       System.out.println("sta==="+sta);
                                                         commSQL = "SELECT * FROM defcode where  codeType='D' and   sno>0   ";
                                                         ListResult defcode__D = DBcomic.execSql(commSQL );
                                                         for (Map defcode_D : defcode__D.getResult()) {
