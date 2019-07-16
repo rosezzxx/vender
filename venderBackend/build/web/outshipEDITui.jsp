@@ -91,8 +91,8 @@
         <link rel="stylesheet" href="assets/css/main.css">
         <link rel="stylesheet" href="assets/css/owl.carousel.css">
         <link rel="stylesheet" href="assets/css/owl.transitions.css"> 
-        <link rel="stylesheet" href="assets/css/font-awesome.css">
-        <link rel="stylesheet" href="assets/css/fontawesome/css/all.min.css">
+        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" href="assets/font-awesome/css/all.min.css">
         <link href="assets/css/bootstrap.css" rel="stylesheet">
         <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
         <link href="assets/css/style.css" rel="stylesheet">
@@ -364,13 +364,13 @@
                                     <% if (rPagination.getEndPage() > 1) {%>
                                     <nav aria-label="Page navigation  ">
                                         <ul class="pagination"> 
-                                            <li class="page-item"><a class="page-link" href="<%=rPagination.getPrevPagesUrl()%>"><i class="fas fa-angle-double-left"></i></a></li>  
-                                            <li class="page-item"><a class="page-link" href="<%=rPagination.getPrevUrl()%>"><i class="fas fa-angle-left"></i></a></li>
+                                            <li class="page-item"><a class="page-link" href="<%=rPagination.getPrevPagesUrl()%>"><i class="fa fa-angle-double-left"></i></a></li>  
+                                            <li class="page-item"><a class="page-link" href="<%=rPagination.getPrevUrl()%>"><i class="fa fa-angle-left"></i></a></li>
                                                     <% for (Map pageRow : rPagination.getPages().getResult()) {%>
                                             <li class="page-item <%=pageRow.getOrDefault("active", "")%>" ><a class="page-link" href="<%=pageRow.get("url")%>"><%=pageRow.get("page")%></a></li>
                                                 <% }%>
-                                            <li class="page-item"><a class="page-link" href="<%=rPagination.getNextUrl()%>"><i class="fas fa-angle-right"></i></i></a></li>
-                                            <li class="page-item"><a class="page-link" href="<%=rPagination.getNextPagesUrl()%>"><i class="fas fa-angle-double-right"></i></a></li>
+                                            <li class="page-item"><a class="page-link" href="<%=rPagination.getNextUrl()%>"><i class="fa fa-angle-right"></i></i></a></li>
+                                            <li class="page-item"><a class="page-link" href="<%=rPagination.getNextPagesUrl()%>"><i class="fa fa-angle-double-right"></i></a></li>
                                         </ul>
                                     </nav>
                                     <% }%>      

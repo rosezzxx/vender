@@ -64,8 +64,8 @@
         <link rel="stylesheet" href="assets/css/main.css">
         <link rel="stylesheet" href="assets/css/owl.carousel.css">
         <link rel="stylesheet" href="assets/css/owl.transitions.css">
-        <link rel="stylesheet" href="assets/css/font-awesome.css">
-        <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+        <link rel="stylesheet" href="assets/font-awesome/css/all.min.css">      
+        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.css"/>
 
     </head>
    <body class="book-home bg-gray">
